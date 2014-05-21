@@ -1,0 +1,17 @@
+{% extends "payment_index.html" %}
+{% block title %}
+Paypal Advanced : Response
+{% endblock %}
+{% block content %}
+    <div>
+        {% if pnrref %}
+            <h3> Thank you for your payment </h3>
+            <p>Status : {{message}}</p>
+            <p>Reference Number : {{pnrref}}</p>
+            <p>Amount : {{amount}}</p>
+        {% else %}
+            <h3>Your payment cancelled</h3>
+            <p>Status : {{message}}</p>
+        {% endif %}
+    </div>
+{% endblock %}

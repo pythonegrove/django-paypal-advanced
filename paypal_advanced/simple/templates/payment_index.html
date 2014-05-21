@@ -1,0 +1,107 @@
+{% extends "shop/base.html" %}
+<html>
+    <title>
+    {% block title %}
+    paypal advanced
+    {% endblock %}
+    </title>
+     
+    
+    <head>
+       
+        
+        <style type="text/css">
+        ul.errorlist{
+        margin-left: 200px;
+        position: absolute;
+        margin-top: 0px;
+        color: red;
+        }
+        ul.errorlist li{
+            list-style:none;
+        }
+        input{
+            width:200px;
+            height:25px;
+        }
+        </style>
+        
+    </head>
+    <body>
+        
+        {% block header %}
+            <h2>Paypal Advanced Library</h2>
+        {% endblock %}
+        
+        {% block content %}
+            <h3>Checkout Form</h3>
+            <form action="" method="POST" >
+                {% csrf_token %}
+            <table>
+                {{checkout_form.as_table}}
+                <tr>
+                    <td>
+                    </td>
+                    <td><input style="width: 80px;" type="submit" value="Submit" name="Submit" />
+            </table>
+            </form>
+        {% endblock %}
+        
+    </body>
+{% block javascript %}
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.8.0.js"></script>
+
+
+        <script>
+        $(document).ready(function(){
+        var top_url = window.location.href
+        
+        var total_amount = top_url.split('=');
+        var total_length = top_url.split('=').length;
+        if (total_length > 2){
+    
+        var final_amount = total_amount[1].split('/');
+        //alert(final_amount[0])
+        var final_street = total_amount[2].split('/');
+        var final_state = total_amount[3].split('/');
+        var final_city = total_amount[4].split('/');
+        var final_zip = total_amount[5].split('/');
+        var final_country = total_amount[6].split('/');
+        var final_email = total_amount[7].split('/');
+        var final_fname = total_amount[7].split('/');
+        var final_lname = total_amount[8].split('/');
+        
+        //alert(final_street)
+        $('#id_total').attr('readonly','readonly');
+        $('#id_shipping_cost').attr('readonly','readonly');
+        $('#id_tax').attr('readonly','readonly');
+        $('#id_total').val(final_amount[0])
+        $('#id_ship_street').val(final_street[0])
+        $('#id_ship_state').val(final_state[0])
+        $('#id_ship_city').val(final_city[0])
+        $('#id_ship_postal_code').val(final_zip[0])
+        $('#id_ship_country').val('USA')
+        $('#id_email').val(final_email[0])
+        $('#id_first_name').val(final_fname[0])
+        $('#id_last_name').val(final_lname[0])
+        
+        $('#id_shipping_cost').val(0)
+        $('#id_tax').val(0)
+        }
+        else{
+        $('#id_total').attr('readonly','readonly');
+        $('#id_shipping_cost').attr('readonly','readonly');
+        $('#id_tax').attr('readonly','readonly');
+        var final_amount = total_amount[1].split('/');
+        $('#id_total').val(final_amount)
+        $('#id_shipping_cost').val(0)
+        $('#id_tax').val(0)
+            
+        }
+        
+        });
+        </script>
+    
+{% endblock %}
+</html>

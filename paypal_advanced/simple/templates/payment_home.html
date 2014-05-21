@@ -1,0 +1,15 @@
+{% extends "payment_index.html" %}
+
+{% block title %}
+Paypal Advanced : Checkout
+{% endblock %}
+
+{% block content %}
+<div>
+
+<iframe src="https://payflowlink.paypal.com?
+MODE={{token.mode}}&SECURETOKENID={{token.secure_token_id}}{% if token.secure_token %}&SECURETOKEN={{token.secure_token}}{% endif %}"
+name="test_iframe" scrolling="{{iframe_scrolling}}" width="{{iframe_width}}px" height="{{iframe_height}}px"></iframe>
+
+</div>
+{% endblock %}

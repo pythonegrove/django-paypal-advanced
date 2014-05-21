@@ -1,0 +1,56 @@
+{% load i18n %}
+<h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+<style>
+    .calendarbox {
+        margin-left: -251px;
+    }
+</style>
+<script type="text/JavaScript" src="/static/js/datepicker/jquery.mtz.monthpicker.js"></script>
+  <!-- Datepicker CSS -->
+<link rel="stylesheet" href="/static/css/date_picker.css" />
+<script>
+    
+    $(function() {
+      $( ".vDateField" ).datepicker({dateFormat: "yy-mm-dd"});
+    });
+    
+</script>
+<script>
+  $(document).ready(function(){
+    
+  var dates = $( "#id_timestamp__gte, #id_timestamp__lte" ).datepicker({
+		    /*defaultDate: "+1w",*/
+		    /*changeMonth: true,*/
+		    numberOfMonths: 1,
+		    onSelect: function( selectedDate ) {
+			    var option = this.id == "start_date" ? "minDate" : "maxDate",
+				    instance = $( this ).data( "datepicker" ),
+				    date = $.datepicker.parseDate(
+					    instance.settings.dateFormat ||
+					    $.datepicker._defaults.dateFormat,
+					    //$.datepicker.formatDate('yy-mm-dd');
+					    selectedDate, instance.settings );
+			    dates.not( this ).datepicker( "option", option, date );
+			    
+		    }
+	    });
+  
+
+  
+
+  
+  
+  
+  
+});
+  
+
+
+</script>
+<form method="GET" action="">
+    {{ spec.form.as_p }}
+    <p>
+    <input type="submit" value="{% trans "Search" %}">
+    <input type="reset" value="{% trans "Clear" %}">
+    </p>
+</form>
