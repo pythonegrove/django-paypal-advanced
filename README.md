@@ -35,6 +35,9 @@ urlpatterns = patterns('',
 )
 ```
 
-
 *  Create required data structure:
 ```./manage.py syncdb```
+
+*  For support contact:
+```biz@egrovesys.com```
+
